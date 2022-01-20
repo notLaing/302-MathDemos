@@ -5,16 +5,16 @@ using UnityEngine;
 public class LerpDemoScript : MonoBehaviour
 {
     public Transform pointA, pointB;
-    [Range(0, 1)]
+    //[Range(0, 1)]
     public float percent = 0;
 
     void Interpolate()
     {
         if (pointA != null && pointB != null)
         {
-            transform.position = Vector3.Lerp(pointA.position, pointB.position, percent);
+            transform.position = AnimMath.Lerp(pointA.position, pointB.position, percent, false);
 
-            transform.rotation = Quaternion.Lerp(pointA.rotation, pointB.rotation, percent);
+            transform.rotation = AnimMath.Lerp(pointA.rotation, pointB.rotation, percent);
         }
     }
 

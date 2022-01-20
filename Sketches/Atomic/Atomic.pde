@@ -15,7 +15,7 @@ void draw(){
   ///////////////// START YOUR CODE HERE:
   
   //variables
-  float time = millis()/1000f;
+  /*float time = millis()/1000f;
   PVector coord = new PVector(cos(time) * 150f, sin(time) * 50f);//squashed/stretched circle
   
   //red
@@ -58,8 +58,19 @@ void draw(){
   ellipse(br * cos(bt), br * sin(bt), 10, 10);
   popMatrix();
   
-  
+  */
   ///////////////// END YOUR CODE HERE
+  
+  
+  //class code
+  noStroke();
+  fill(255);
+  PVector red = FindOvalPos(0, 0);
+  PVector green = FindOvalPos(60, 0);
+  PVector blue = FindOvalPos(-60, 0);
+  ellipse(red.x, red.y, 20, 20);
+  ellipse(green.x, green.y, 20, 20);
+  ellipse(blue.x, blue.y, 20, 20);
   
 }
 void drawBackground(){
@@ -89,4 +100,29 @@ void drawBackground(){
   stroke(100,100,255);
   ellipse(0,0,300,100);
   popMatrix();
+}
+
+//class code function
+PVector FindOvalPos(float rotateAmount, float timeOffset)
+{
+  float t = millis() / 1000.0;
+  t += timeOffset;
+  //path on oval
+  float x = cos(t) * 150f;
+  float y = sin(t) * 50f;
+  //cartesian -> polar
+  float angle = atan2(y, x);
+  float mag = sqrt(pow(x, 2) + pow(y, 2));
+  
+  //rotate
+  angle -= radians(rotateAmount);
+  
+  //polar -> cartesian
+  x = mag * cos(angle);
+  y = mag * sin(angle);
+  
+  //translate
+  x += width/2;
+  y += height/2;
+  return new PVector(x, y);
 }
